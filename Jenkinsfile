@@ -16,11 +16,14 @@ pipeline {
                 sh './jenkins/scripts/test.sh' 
             }
         }
+        stage('Manual Approval') { 
+            steps {
+                input message: 'Apakah ingin melanjutkan deploy ?'
+            }
+        }
         stage('Deploy') { 
             steps {
                 sh './jenkins/scripts/deliver.sh' 
-                input message: 'Apakah ingin melanjutkan deploy ?' 
-                sh './jenkins/scripts/kill.sh' 
             }
         }
     }
